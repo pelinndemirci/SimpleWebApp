@@ -32,14 +32,14 @@ class AppTest {
     @Test 
     public void testEmptyArray()
     {
-        int array [] = {};
-        assertFalse(App.EnBuyukElemaniBulma(null, 1));
+        int array [] = new int[10];
+        assertFalse(App.EnBuyukElemaniBulma(array, 1));
     }
 
     @Test 
     public void testNull()
     {
-        assertFalse(App.EnBuyukElemaniBulma(null, 1));
+        assertFalse(App.EnBuyukElemaniBulma(null, 0));
     }
 
 }

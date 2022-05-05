@@ -5,6 +5,17 @@ package SimpleWebApp;
 
 import java.util.*;
 
+import spark.ModelAndView;
+import spark.template.mustache.MustacheTemplateEngine;
+import static spark.Spark.get;
+import static spark.Spark.post;
+import static spark.Spark.port;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
@@ -12,16 +23,59 @@ public class App {
 
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
-    }
-    public static boolean search(ArrayList<Integer> array, int e)
-    {
-        System.out.println("Inside search");
-        if(array==null) return false;
-        for(int elt:array)
-        {
-            if(elt==e) return true;
-        }
-        return false;
 
+        get("/", (req, res) -> "Hello, World");
+
+        get("/compute",
+        (rq, rs) -> {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("result", "not computed yet!");
+        return new ModelAndView(map, "compute.mustache");
+        },
+        new MustacheTemplateEngine());
+
+        post("/compute", (req, res) -> {
+            
+            String input1 = req.queryParams("input1");
+            java.util.Scanner sc1 = new java.util.Scanner(input1);
+            sc1.useDelimiter("[;\r\n]+");
+            int [] girilen_degerler = new int[10];
+            while (sc1.hasNext())
+            {
+                for(int i=0;i<girilen_degerler.length;i++)
+                {
+                    girilen_degerler[i]=Integer.parseInt(sc1.next().replaceAll("\\s",""));
+                }
+            }
+            sc1.close();
+
+            String input2 = req.queryParams("input2").replaceAll("\\s","");
+            int input2AsInt = Integer.parseInt(input2);
+            boolean result = App.EnBuyukElemaniBulma(girilen_degerler, input2AsInt);
+            Map<String, Boolean> map = new HashMap<String, Boolean>();
+            map.put("result", result);
+            return new ModelAndView(map, "compute.mustache");
+            }, new MustacheTemplateEngine());
+           
+    }
+    public static boolean EnBuyukElemaniBulma(int array[], int buyuk_deger)
+    {
+        System.out.println("Girilen Dizi: " + Arrays.toString(array));
+        
+        if(array==null) return false;
+
+        int temp;
+        temp=array[0];
+        
+        for(int i=0;i<array.length;i++)
+        {
+            if(array[i] > temp)
+            {
+                temp = array[i];
+            }
+        }
+
+        if(temp==buyuk_deger) return true;
+        else return false;
     }
 }

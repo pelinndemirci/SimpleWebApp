@@ -17,31 +17,29 @@ class AppTest {
     @Test 
     public void testFound()
     {
-        //Girilen eleman arrayde mevcut.Bu fonksiyon true dönmeli.
-        ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1,2,3,4));
-        assertTrue(App.search(array, 4));
+        //Girilen dizide en büyük değer doğru bulundu.Bu fonksiyon true dönmeli.
+        int dizi[] = {1,5,9,7,0,3,2,4,6,8};
+        assertTrue(App.EnBuyukElemaniBulma(dizi, 9));
     }
 
     @Test 
     public void testNotFound()
     {
-        //Girilen eleman arrayde mevcut değil.Bu fonksiyon false dönmeli.
-        ArrayList<Integer> array = new ArrayList<>(Arrays.asList(1,2,3,4));
-        assertFalse(App.search(array, 5));
+        //Girilen dizide en büyük değer yanlış bulundu.Bu fonksiyon false dönmeli.
+        int dizi[] = {1,5,9,7,0,3,2,4,6,8};
+        assertFalse(App.EnBuyukElemaniBulma(dizi, 5));
     }
-
     @Test 
     public void testEmptyArray()
     {
-        //Array boş. Aranan eleman sonucunda false dönmeli.
-        ArrayList<Integer> array = new ArrayList<>();
-        assertFalse(App.search(array, 1));
+        int array [] = {};
+        assertFalse(App.EnBuyukElemaniBulma(null, 1));
     }
 
     @Test 
     public void testNull()
     {
-        assertFalse(App.search(null, 1));
+        assertFalse(App.EnBuyukElemaniBulma(null, 1));
     }
 
 }

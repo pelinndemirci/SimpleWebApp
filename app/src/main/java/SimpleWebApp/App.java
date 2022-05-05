@@ -18,13 +18,13 @@ import org.apache.logging.log4j.Logger;
 
 public class App {
     public String getGreeting() {
-        return "Hello World!";
+        return "SIMPLE WEB APP";
     }
 
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
 
-        get("/", (req, res) -> "Hello, World");
+        get("/", (req, res) -> "SIMPLE WEB APP");
 
         get("/compute",
         (rq, rs) -> {

@@ -32,6 +32,7 @@ class AppTest {
     @Test 
     public void testEmptyArray()
     {
+        //Girilen dizi boş. Bu fonksiyon false dönmeli.
         int array [] = new int[10];
         assertFalse(App.EnBuyukElemaniBulma(array, 1));
     }
